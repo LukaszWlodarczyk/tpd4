@@ -32,3 +32,5 @@ create_way('K', 0, nodes[5], nodes[8])
 create_way('L', 20, nodes[6], nodes[9])
 create_way('M', 19, nodes[7], nodes[9])
 create_way('N', 18, nodes[8], nodes[9])
+
+print(nodes[9].calculate_cost(ways))
