@@ -1,5 +1,4 @@
 from Node import Node
-from State import State
 from Way import Way
 
 nodes = list()
@@ -17,7 +16,23 @@ def create_way(name, cost, start, finish):
     ways.append(new_way)
 
 
-create_n_nodes(10)
+def print_best_path():
+    path = []
+    way_not_none = True
+    path.append(str(nodes[-1].name))
+    next_node = nodes[-1].best_way[0]
+    while way_not_none:
+        for node in nodes:
+            if node.name == next_node:
+                path.append(str(node.name))
+                if node.best_way is None:
+                    way_not_none = False
+                else:
+                    next_node = node.best_way[0]
+    return path[::-1]
+
+
+create_n_nodes(9)
 create_way('A', 14, nodes[1], nodes[4])
 create_way('B', 13, nodes[1], nodes[5])
 create_way('C', 10, nodes[2], nodes[4])
@@ -33,4 +48,9 @@ create_way('L', 20, nodes[6], nodes[9])
 create_way('M', 19, nodes[7], nodes[9])
 create_way('N', 18, nodes[8], nodes[9])
 
-print(nodes[9].calculate_cost(ways))
+print(f"The lowest cost: {nodes[-1].calculate_cost(ways)}")
+
+# for node in nodes:
+#     print(f"Node: {node.name} Way: {node.best_way} cost: {node.best_cost}")
+
+print(f"The best path: {','.join(print_best_path())}")
